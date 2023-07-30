@@ -47,10 +47,11 @@ EndEvent
 ; ================================ Hunter Pride
 ; 'Hunter Pride' is the menu called when the player activates a defeated victim. The menu can be dynamically expanded with the below functions
 ; When registering a new option, use the callback event to be notified when your option is being selected
+; See https://github.com/Scrabx3/Acheron/wiki/Hunter-Pride for a more throughout documentation
 ; --- Params:
 ; asOptionID:   An ID-String with the option to add. Has to be unique among all options, recommended to prefix
 ; asOptionName: A human readable, descriptive name for your option. Shorter is better, supports localization
-; asIconSource: A filepath to the icon that is to be used, relative to 'Interface\\Acheron'
+; asIconSource: A filepath to an icon that is used for the option, relative to 'Interface\\Acheron'
 ; asConditions: A json string of conditions, stating when the option is available/disabled
 ; -- Return:
 ; The associated integer representing this option, or -1 if the option could not be added
