@@ -24,14 +24,14 @@
     </Folders>
     <ZipFiles Output="@Rel">
         <ZipFile Name="@ModName - @Ver - 1.6.640" RootDir="@ThisProject" Compression="deflate">
-        	<Include>Acheron.esl</Include>
+        	<Include>Acheron.esm</Include>
             <Include>Interface</Include>
             <Include>Scripts</Include>
             <Include>SKSE</Include>
             <Include>Source</Include>
         </ZipFile>
         <ZipFile Name="@ModName - @Ver - 1.5.97" RootDir="@ThisProject" Compression="deflate">
-        	<Include>Acheron.esl</Include>
+        	<Include>Acheron.esm</Include>
             <Include>Interface</Include>
             <Include>Scripts</Include>
             <Include Path="SKSE/Plugins">1597</Include>
