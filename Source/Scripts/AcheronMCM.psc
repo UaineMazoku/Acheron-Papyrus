@@ -14,6 +14,8 @@ Function SetSettingColor(String asSetting, int aiColor) native
 
 Function UpdateKillmoveGlobal() native
 
+String[] _FollowerRescue
+
 ; ----------- Events
 
 String[] Function GetEvents(int aiType) native
@@ -30,7 +32,7 @@ int[] _weights
 ; --------------------- Menu
 
 int Function GetVersion()
-	return 1
+	return 2
 EndFunction
 
 Event OnVersionUpdate(Int newVersion)
@@ -52,6 +54,11 @@ Event OnConfigInit()
   _typesList[2] = "$Achr_Civilian"
   _typesList[3] = "$Achr_Guards"
   _typesList[4] = "$Achr_NPC"
+
+  _FollowerRescue = new String[3]
+  _FollowerRescue[0] = "$Achr_Rescue_0"
+  _FollowerRescue[1] = "$Achr_Rescue_1"
+  _FollowerRescue[2] = "$Achr_Rescue_2"
 EndEvent
 
 Event OnConfigOpen()
@@ -109,7 +116,8 @@ Event OnPageReset(string page)
     AddHeaderOption("$Achr_Recovery")
     AddSliderOptionST("recoverhealththresh", "$Achr_RecHealThresh", GetSettingFloat("fKdHealthThresh") * 100, "{1}%")
     AddSliderOptionST("recoverhealfallback", "$Achr_RecHealFallback", GetSettingInt("iKdFallbackTimer"), "{0}s")
-    AddToggleOptionST("recoverfollowerunload", "$Achr_RecFollowerUnload", GetSettingBool("bKdFollowerUnload"))
+    AddMenuOptionST("FollowerRescue", "$Achr_FollowerRescue", _FollowerRescue[GetSettingInt("iFollowerRescue")])
+    AddToggleoptionST("NPCRescueReload", "$Achr_NPCRescueReload", GetSettingBool("bNPCRescueReload"))
 
     AddHeaderOption("$Achr_Stripping")
     AddSliderOptionST("stripchance", "$Achr_StripChance", GetSettingFloat("fStripChance"), "{1}%")
@@ -204,8 +212,6 @@ Event OnSelectST()
     SetOptionFlagsST(getFlag(flag && GetSettingBool("bNotifyColored")), false, "notifycolorchoice")
   ElseIf(s[0] == "hunterpridefollower")
     Toggle("bHunterPrideFollower")
-  ElseIf(s[0] == "recoverfollowerunload")
-    Toggle("bKdFollowerUnload")
   ; --------------- Defeat
   ElseIf(s[0] == "lethalessential")
     Toggle("bLethalEssential")
@@ -219,6 +225,8 @@ Event OnSelectST()
     Toggle("bPlayerDefeat")
   ElseIf(s[0] == "kdnpc")
     Toggle("bNPCDefeat")
+  ElseIf(s[0] == "NPCRescueReload")
+    Toggle("bNPCRescueReload")
   ; --------------- Stripping
   ElseIf(s[0] == "readmestrip")
     ShowMessage("$Achr_StripReadMe", false, "$Ok")
@@ -438,8 +446,8 @@ Event OnHighlightST()
     SetInfoText("$Achr_RecHealThreshHighlight")
   ElseIf(s[0] == "recoverhealfallback")
     SetInfoText("$Achr_RecHealFallbackHighlight")
-  ElseIf(s[0] == "recoverfollowerunload")
-    SetInfoText("$Achr_RecFollowerUnloadHighlight")
+  ElseIf(s[0] == "NPCRescueReload")
+    SetInfoText(("$Achr_NPCRescueReloadHighlight"))
   ; --------------- Stripping
   ElseIf(s[0] == "strips")
     int i = s[1] as int
@@ -459,6 +467,25 @@ Event OnHighlightST()
 EndEvent
 
 ; --------------------- Default State
+
+State FollowerRescue
+  Event OnMenuOpenST()
+    SetMenuDialogStartIndex(GetSettingInt("iFollowerRescue"))
+    SetMenuDialogDefaultIndex(1)
+    SetMenuDialogOptions(_FollowerRescue)
+  EndEvent
+  Event OnMenuAcceptST(Int aiIndex)
+    SetSettingInt("iFollowerRescue", aiIndex)
+    SetMenuOptionValueST(_FollowerRescue[aiIndex])
+  EndEvent
+  Event OnDefaultST()
+    SetSettingInt("iFollowerRescue", 1)
+    SetMenuOptionValueST(_FollowerRescue[1])
+  EndEvent
+  Event OnHighlightST()
+    SetInfoText("$Achr_FollowerRescueHighlight")
+  EndEvent
+EndState
 
 State viewingevents
   Event OnMenuOpenST()
