@@ -51,7 +51,7 @@ EndEvent
 ; --- Params:
 ; asOptionID:   An ID-String with the option to add. Has to be unique among all options, recommended to prefix
 ; asOptionName: A human readable, descriptive name for your option. Shorter is better, supports localization
-; asIconSource: A filepath to an icon that is used for the option, relative to 'Interface\\Acheron'
+; asIconSource: A file path to an icon that is used for the option, relative to 'Interface\\Acheron'
 ; asConditions: A json string of conditions, stating when the option is available/disabled
 ; -- Return:
 ; The associated integer representing this option, or -1 if the option could not be added
