@@ -364,7 +364,7 @@ EndEvent
 
 Event OnKeyMapChangeST(int newKeyCode, string conflictControl, string conflictName)
   String[] s = StringUtil.Split(GetState(), "_")
-  If(newKeyCode == 1)
+  If(newKeyCode == 1 || newKeyCode == 277)
     newKeyCode = -1
   EndIf
   If(s[0] == "hunterpridemodkey")
