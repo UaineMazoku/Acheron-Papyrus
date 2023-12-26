@@ -229,7 +229,7 @@ Event OnSelectST()
     Toggle("bNPCRescueReload")
   ; --------------- Stripping
   ElseIf(s[0] == "readmestrip")
-    ShowMessage("$Achr_StripReadMe", false, "$Ok")
+    ShowMessage("$Achr_StripReadMe", false, "$Achr_Ok")
   ElseIf(s[0] == "defaultstrip")
     If(!ShowMessage("$Achr_StripsDefaultsMsg"))
       return
@@ -245,7 +245,7 @@ Event OnSelectST()
     SetSettingInt("iStrips", strips)
   ; --------------- Events
   ElseIf(s[0] == "readmeevents")
-    ShowMessage("$Achr_EventReadMe", false, "$Ok")
+    ShowMessage("$Achr_EventReadMe", false, "$Achr_Ok")
   EndIf
 EndEvent
 
