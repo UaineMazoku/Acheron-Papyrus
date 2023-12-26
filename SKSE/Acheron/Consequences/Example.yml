@@ -22,6 +22,8 @@ Conditions:
             - 0xA7EF|Example.esp: false
         Keyword:
             - 688827|Skyrim.esm: true
+        CrimeFaction:
+            - None
 
     Victim:
         Faction:
