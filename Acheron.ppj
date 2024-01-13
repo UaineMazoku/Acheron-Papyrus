@@ -11,7 +11,7 @@
         <Variable Name="ThisProject" Value="."/>
         <Variable Name="Rel" Value=".\.release"/>
         <Variable Name="MO2" Value=".."/>
-        <Variable Name="Ver" Value="1.4.2.0"/>
+        <Variable Name="Ver" Value="1.4.3.0"/>
     </Variables>
     <Imports>
         <Import>@ThisProject\Source\Scripts</Import>
@@ -23,7 +23,7 @@
         <Folder>.\Source\Scripts</Folder>
     </Folders>
     <ZipFiles Output="@Rel">
-        <ZipFile Name="@ModName - @Ver - 1.6.640" RootDir="@ThisProject" Compression="deflate">
+        <ZipFile Name="@ModName - @Ver - 1.6.1130" RootDir="@ThisProject" Compression="deflate">
         	<Include>Acheron.esm</Include>
             <Include>Interface</Include>
             <Include>Scripts</Include>

@@ -7,6 +7,8 @@ bool Function IsProcessingDisabled() native global
 ; Disable/Enable consequence events
 Function DisableConsequence(bool abDisable) native global
 bool Function IsConsequenceDisabled() native global
+; If teleport events are currently permitted as by Acherons config data
+bool Function IsTeleportAllowed() native global
 
 ; ================================ Defeat
 ; A defeated actor is bleeding out and immune to damage
