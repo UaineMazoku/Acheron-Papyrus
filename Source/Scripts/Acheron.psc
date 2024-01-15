@@ -46,6 +46,16 @@ Function UnregisterForActorRescued_MgEff(ActiveMagicEffect akEffect) native glob
 Event OnActorRescued(Actor akVictim)
 EndEvent
 
+; Invoked when a death event is started (these only fire for the player) global native
+Function RegisterForPlayerDeathEvent(Form akForm) native global
+Function UnregisterForPlayerDeathEvent(Form akForm) native global
+Function RegisterForPlayerDeathEvent_Alias(ReferenceAlias akAlias) native global
+Function UnregisterForPlayerDeathEvent_Alias(ReferenceAlias akAlias) native global
+Function RegisterForPlayerDeathEvent_MgEff(ActiveMagicEffect akEffect) native global
+Function UnregisterForPlayerDeathEvent_MgEff(ActiveMagicEffect akEffect) native global
+Event OnPlayerDeathEvent()
+EndEvent
+
 ; ================================ Hunter Pride
 ; 'Hunter Pride' is the menu called when the player activates a defeated victim. The menu can be dynamically expanded with the below functions
 ; When registering a new option, use the callback event to be notified when your option is being selected
