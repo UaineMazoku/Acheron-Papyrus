@@ -167,19 +167,6 @@ Event OnPageReset(string page)
       AddSliderOptionST("event_" + i, _events[i], _weights[i], "{0}")
       i += 1
     EndWhile
-
-  ElseIf (page == "$Achr_Debug")
-    SetCursorPosition(1)
-    AddHeaderOption("$Achr_DefeatedFollowers")
-    Actor[] defeated = Acheron.GetDefeated()
-    int i = 0
-    While(i < defeated.Length)
-      If(defeated[i].IsPlayerTeammate())
-        AddTextOptionST("rescuefol_" + defeated[i].GetFormID(), defeated[i].GetLeveledActorBase().GetName(), "")
-      EndIf
-      i += 1
-    EndWhile
-    AddHeaderOption("")
   EndIf
 EndEvent
 
