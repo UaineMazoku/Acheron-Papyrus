@@ -41,6 +41,14 @@ Event OnVersionUpdate(Int newVersion)
   EndIf
 EndEvent
 
+Event OnGameReload()
+  Parent.OnGameReload()
+
+  If (SKSE.GetPluginVersion("Acheron") == -1)
+    Debug.MessageBox("[Acheron]\n\nMissing Acheron.dll. Acheron will NOT work correctly while this error persists.\nThis is likely due installing a version that doesn't support your game version.")
+  EndIf
+EndEvent
+
 Event OnConfigInit()
   Pages = new String[4]
   Pages[0] = "$Achr_General"
