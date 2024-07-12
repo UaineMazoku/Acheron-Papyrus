@@ -2,41 +2,6 @@
 ;NEXT FRAGMENT INDEX 2
 Scriptname QF_AcheronDefaultCommon_0500592D Extends Quest Hidden
 
-;BEGIN ALIAS PROPERTY currentLoc
-;ALIAS PROPERTY TYPE LocationAlias
-LocationAlias Property Alias_currentLoc Auto
-;END ALIAS PROPERTY
-
-;BEGIN ALIAS PROPERTY EdgeMarkerHold
-;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_EdgeMarkerHold Auto
-;END ALIAS PROPERTY
-
-;BEGIN ALIAS PROPERTY currentHold
-;ALIAS PROPERTY TYPE LocationAlias
-LocationAlias Property Alias_currentHold Auto
-;END ALIAS PROPERTY
-
-;BEGIN ALIAS PROPERTY MapMarker
-;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_MapMarker Auto
-;END ALIAS PROPERTY
-
-;BEGIN ALIAS PROPERTY FallbackMarker
-;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_FallbackMarker Auto
-;END ALIAS PROPERTY
-
-;BEGIN ALIAS PROPERTY Player
-;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_Player Auto
-;END ALIAS PROPERTY
-
-;BEGIN ALIAS PROPERTY OutsideMarkerHold
-;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_OutsideMarkerHold Auto
-;END ALIAS PROPERTY
-
 ;BEGIN ALIAS PROPERTY OutsideMarker
 ;ALIAS PROPERTY TYPE ReferenceAlias
 ReferenceAlias Property Alias_OutsideMarker Auto
@@ -45,6 +10,26 @@ ReferenceAlias Property Alias_OutsideMarker Auto
 ;BEGIN ALIAS PROPERTY EdgeMarker
 ;ALIAS PROPERTY TYPE ReferenceAlias
 ReferenceAlias Property Alias_EdgeMarker Auto
+;END ALIAS PROPERTY
+
+;BEGIN ALIAS PROPERTY Player
+;ALIAS PROPERTY TYPE ReferenceAlias
+ReferenceAlias Property Alias_Player Auto
+;END ALIAS PROPERTY
+
+;BEGIN ALIAS PROPERTY FallbackMarkerLoaded
+;ALIAS PROPERTY TYPE ReferenceAlias
+ReferenceAlias Property Alias_FallbackMarkerLoaded Auto
+;END ALIAS PROPERTY
+
+;BEGIN ALIAS PROPERTY FallbackMarkerAny
+;ALIAS PROPERTY TYPE ReferenceAlias
+ReferenceAlias Property Alias_FallbackMarkerAny Auto
+;END ALIAS PROPERTY
+
+;BEGIN ALIAS PROPERTY currentLoc
+;ALIAS PROPERTY TYPE LocationAlias
+LocationAlias Property Alias_currentLoc Auto
 ;END ALIAS PROPERTY
 
 ;BEGIN FRAGMENT Fragment_0
@@ -56,16 +41,10 @@ Utility.Wait(2)
 
 ObjectReference player = Alias_Player.GetReference()
 ReferenceAlias[] locs = new ReferenceAlias[4]
-If(player.IsInInterior())
-  locs[0] = Alias_OutsideMarker
-  locs[1] = Alias_OutsideMarkerHold
-  locs[2] = Alias_EdgeMarkerHold
-Else
-  locs[0] = Alias_EdgeMarkerHold
-  locs[1] = Alias_EdgeMarker
-  locs[2] = Alias_OutsideMarkerHold
-EndIf
-locs[3] = Alias_FallbackMarker
+locs[0] = Alias_EdgeMarker
+locs[1] = Alias_OutsideMarker
+locs[2] = Alias_FallbackMarkerLoaded
+locs[3] = Alias_FallbackMarkerAny
 
 int i = 0
 While(i < locs.Length)
