@@ -19,15 +19,12 @@ String[] _FollowerRescue
 ; ----------- Events
 
 String[] Function GetEvents(int aiType) native
-int[] Function GetEventWeights(int aiType) native
-Function SetEventWeight(String asEvent, int aiType, int aiNewWeight) native
+String Function SetEventWeight(String asEvent, int aiType, int aiNewWeight) native
 
 String[] _typesList
 int _type = 0
 
-String[] _events
-int[] _weights
-; assert(_events.Length == _weights.Length)
+String[] _events  ; [Flags] Name;Weight;ID
 
 ; --------------------- Menu
 
@@ -153,7 +150,6 @@ Event OnPageReset(string page)
 
   ElseIf(page == "$Achr_Events")
     _events = GetEvents(_type)
-    _weights = GetEventWeights(_type)
     SetCursorFillMode(LEFT_TO_RIGHT)
     AddMenuOptionST("viewingevents", "$Achr_EventView", _typesList[_type])
     AddTextOptionST("readmeevents", "$Achr_ReadMe", "")
@@ -164,8 +160,16 @@ Event OnPageReset(string page)
       return
     EndIf
     int i = 0
+    int pi = -1
     While(i < _events.Length)
-      AddSliderOptionST("event_" + i, _events[i], _weights[i], "{0}")
+      String[] args = StringUtil.Split(_events[i], ";")
+      String w = args[1]
+      int p = StringUtil.GetNthChar(args[0], 1) as int
+      If (pi < p && i % 2 == 1)
+        AddEmptyOption()
+      EndIf
+      AddSliderOptionST("event_" + i + "_" + w, args[0], w as int, "{0}")
+      pi = p
       i += 1
     EndWhile
   EndIf
@@ -308,7 +312,8 @@ Event OnSliderOpenST()
   ; --------------- Events
   ElseIf(s[0] == "event")
     int i = s[1] as int
-		SetSliderDialogStartValue(_weights[i])
+    int w = s[2] as int
+		SetSliderDialogStartValue(w)
 		SetSliderDialogDefaultValue(50)
 		SetSliderDialogRange(0, 100)
 		SetSliderDialogInterval(1)
@@ -354,8 +359,11 @@ Event OnSliderAcceptST(float value)
   ; --------------- Events
   ElseIf(s[0] == "event")
     int i = s[1] as int
-    _weights[i] = value as int
-    SetEventWeight(_events[i], _type, _weights[i])
+    int w = s[2] as int
+    If (value as int == w)
+      return
+    EndIf
+    _events[i] = SetEventWeight(_events[i], _type, value as int)
 		SetSliderOptionValueST(value, "{0}")
   EndIf
 EndEvent
