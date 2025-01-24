@@ -26,6 +26,12 @@ int _type = 0
 
 String[] _events  ; [Flags] Name;Weight;ID
 
+int Function GetEventWeight(String asEvent)
+  String[] args = StringUtil.Split(asEvent, ";")
+  String w = args[1]
+  return w as int
+EndFunction
+
 ; --------------------- Menu
 
 int Function GetVersion()
@@ -168,7 +174,7 @@ Event OnPageReset(string page)
       If (pi < p && i % 2 == 1)
         AddEmptyOption()
       EndIf
-      AddSliderOptionST("event_" + i + "_" + w, args[0], w as int, "{0}")
+      AddSliderOptionST("event_" + i, args[0], w as int, "{0}")
       pi = p
       i += 1
     EndWhile
@@ -312,7 +318,8 @@ Event OnSliderOpenST()
   ; --------------- Events
   ElseIf(s[0] == "event")
     int i = s[1] as int
-    int w = s[2] as int
+    string e = _events[i]
+    int w = GetEventWeight(e)
 		SetSliderDialogStartValue(w)
 		SetSliderDialogDefaultValue(50)
 		SetSliderDialogRange(0, 100)
@@ -359,11 +366,12 @@ Event OnSliderAcceptST(float value)
   ; --------------- Events
   ElseIf(s[0] == "event")
     int i = s[1] as int
-    int w = s[2] as int
+    string e = _events[i]
+    int w = GetEventWeight(e)
     If (value as int == w)
       return
     EndIf
-    _events[i] = SetEventWeight(_events[i], _type, value as int)
+    _events[i] = SetEventWeight(e, _type, value as int)
 		SetSliderOptionValueST(value, "{0}")
   EndIf
 EndEvent
