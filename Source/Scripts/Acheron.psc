@@ -25,6 +25,7 @@ bool Function IsPacified(Actor akActor) native global
 
 ; get all currently defeated actors
 Actor[] Function GetDefeated(bool abLoadedOnly = false) native global
+Actor[] Function GetPacified(bool abLoadedOnly = false) native global
 
 ; Invoked whenever an actor is defeated
 Function RegisterForActorDefeated(Form akForm) native global

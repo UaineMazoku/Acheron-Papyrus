@@ -11,11 +11,12 @@
         <Variable Name="ThisProject" Value="."/>
         <Variable Name="Rel" Value=".\.release"/>
         <Variable Name="MO2" Value=".."/>
-        <Variable Name="Ver" Value="1.5.3.1"/>
+        <Variable Name="Ver" Value="1.5.4.0"/>
     </Variables>
     <Imports>
         <Import>@ThisProject\Source\Scripts</Import>
         <Import>@MO2\SkyUI SDK\Source\Scripts</Import>
+        <Import>@MO2\ConsoleUtilSSE Extended\Source\Scripts</Import>
         <!-- Base Game -->
         <Import>C:\Program Files (x86)\Steam\steamapps\common\Skyrim Special Edition\Data\Source\Scripts</Import>
     </Imports>
