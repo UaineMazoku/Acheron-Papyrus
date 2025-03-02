@@ -35,7 +35,7 @@ EndFunction
 ; --------------------- Menu
 
 int Function GetVersion()
-	return 2
+	return 3
 EndFunction
 
 Event OnVersionUpdate(Int newVersion)
@@ -65,6 +65,10 @@ Event OnConfigInit()
   _typesList[2] = "$Achr_Civilian"
   _typesList[3] = "$Achr_Guards"
   _typesList[4] = "$Achr_NPC"
+
+  _FollowerDefeat = new String[2]
+  _FollowerDefeat[0] = "$Achr_FollowerDefeat_0"
+  _FollowerDefeat[1] = "$Achr_FollowerDefeat_1"
 
   _FollowerRescue = new String[3]
   _FollowerRescue[0] = "$Achr_Rescue_0"
@@ -124,6 +128,7 @@ Event OnPageReset(string page)
     AddToggleoptionST("kdplayer", "$Achr_KdPlayer", GetSettingBool("bPlayerDefeat"))
     AddToggleOptionST("kdfolwithplayer", "$Achr_KdFolWithplayer", GetSettingBool("bFolWithPlDefeat"))
     AddToggleoptionST("kdnpc", "$Achr_KdNPC", GetSettingBool("bNPCDefeat"))
+    AddMenuOptionST("FollowerDefeat", "$Achr_FollowerDefeat", _FollowerDefeat[GetSettingInt("iFollowerDefeat")])
 
     AddHeaderOption("$Achr_Recovery")
     AddSliderOptionST("recoverhealththresh", "$Achr_RecHealThresh", GetSettingFloat("fKdHealthThresh") * 100, "{1}%")
@@ -458,6 +463,8 @@ Event OnHighlightST()
     SetInfoText("$Achr_KdFolWithplayerHighlight")
   ElseIf(s[0] == "kdnpc")
     SetInfOText("$Achr_KdNPCHighlight")
+  ElseIf(s[0] == "FollowerDefeat")
+    SetInfoText("$Achr_FollowerDefeatHighlight")
   ElseIf(s[0] == "recoverhealththresh")
     SetInfoText("$Achr_RecHealThreshHighlight")
   ElseIf(s[0] == "recoverhealfallback")
@@ -483,6 +490,25 @@ Event OnHighlightST()
 EndEvent
 
 ; --------------------- Default State
+
+State FollowerDefeat
+  Event OnMenuOpenST()
+    SetMenuDialogStartIndex(GetSettingInt("iFollowerDefeat"))
+    SetMenuDialogDefaultIndex(1)
+    SetMenuDialogOptions(_FollowerDefeat)
+  EndEvent
+  Event OnMenuAcceptST(Int aiIndex)
+    SetSettingInt("iFollowerDefeat", aiIndex)
+    SetMenuOptionValueST(_FollowerDefeat[aiIndex])
+  EndEvent
+  Event OnDefaultST()
+    SetSettingInt("iFollowerDefeat", 1)
+    SetMenuOptionValueST(_FollowerDefeat[1])
+  EndEvent
+  Event OnHighlightST()
+    SetInfoText("$Achr_FollowerDefeatHighlight")
+  EndEvent
+EndState
 
 State FollowerRescue
   Event OnMenuOpenST()
